@@ -13,7 +13,7 @@ function Review() {
   useEffect(() => {
     const fetchDataSubject = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/course');
+        const response = await axios.get('http://18.212.152.243:3000/course');
         setSubjects(response.data.data);
         console.log(response.data.data);
       } catch (error) {

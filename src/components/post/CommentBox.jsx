@@ -14,7 +14,7 @@ const CommentBox = ({ postId, dataComment }) => {
   const postComment = async () => {
 
     try {
-      const response = await axios.post('http://localhost:3000/comment', {
+      const response = await axios.post('http://18.212.152.243:3000/comment', {
         message: comment,
         userId: user.userId,
         postId: postId

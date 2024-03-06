@@ -28,7 +28,7 @@ const DropdownComment = ({ commentId, postId }) => {
   function deleteComment(id) {
     // console.log(postId);
     console.log("Delete Comment: " + id);
-    axios.delete(`http://localhost:3000/comment/${id}`, { data: { postId: postId } })
+    axios.delete(`http://18.212.152.243:3000/comment/${id}`, { data: { postId: postId } })
       .then(res => {
         window.location.reload();
       })

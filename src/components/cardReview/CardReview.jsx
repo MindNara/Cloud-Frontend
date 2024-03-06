@@ -29,7 +29,7 @@ function CardReview({ id }) {
         console.log(id)
         const fetchDataReview = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/review/${id}`);
+                const response = await axios.get(`http://18.212.152.243:3000/review/${id}`);
                 setReviews(response.data.data);
                 console.log(response.data.data);
             } catch (error) {
@@ -80,7 +80,7 @@ function CardReview({ id }) {
 
     const deleteReview = () => {
         console.log("Delete Review: " + reviewToDeleteId);
-        axios.delete(`http://localhost:3000/review/${reviewToDeleteId}`)
+        axios.delete(`http://18.212.152.243:3000/review/${reviewToDeleteId}`)
             .then(res => {
                 window.location.reload();
             })
@@ -97,7 +97,7 @@ function CardReview({ id }) {
         };
 
         try {
-            const response = await axios.put(`http://localhost:3000/review/${reviewToEditId}`, data, {
+            const response = await axios.put(`http://18.212.152.243:3000/review/${reviewToEditId}`, data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -119,7 +119,7 @@ function CardReview({ id }) {
         // console.log("eiei " + data.userId);
 
         try {
-            const response = await axios.put(`http://localhost:3000/review/like/${reviewId}`, data, {
+            const response = await axios.put(`http://18.212.152.243:3000/review/like/${reviewId}`, data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -140,7 +140,7 @@ function CardReview({ id }) {
         // console.log("eiei " + data.userId);
 
         try {
-            const response = await axios.put(`http://localhost:3000/review/dislike/${reviewId}`, data, {
+            const response = await axios.put(`http://18.212.152.243:3000/review/dislike/${reviewId}`, data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

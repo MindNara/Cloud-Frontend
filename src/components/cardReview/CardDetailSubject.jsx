@@ -8,7 +8,7 @@ const CardDetailSubject = ({ id }) => {
         console.log(id)
         const fetchDataSubjectDetail = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/course/${id}`);
+                const response = await axios.get(`http://18.212.152.243:3000/course/${id}`);
                 setDetailSubject(response.data.data);
                 console.log(response.data.data);
             } catch (error) {

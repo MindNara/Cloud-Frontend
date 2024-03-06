@@ -58,7 +58,7 @@ const validateForm = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/login', { email, password });
+            const response = await axios.post('http://18.212.152.243:3000/login', { email, password });
             if (response.data.success) {
                 const { accessToken, user } = response.data;
                 localStorage.setItem('accessToken', accessToken);

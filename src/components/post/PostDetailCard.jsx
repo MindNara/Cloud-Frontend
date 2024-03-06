@@ -20,7 +20,7 @@ const PostDetailCard = () => {
   const [postDetail, setPostDetail] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/post")
+    axios.get("http://18.212.152.243:3000/post")
       .then((res) => {
         setPostDetail(res.data.data);
         const filteredData = res.data.data.filter(item => item.like?.SS.includes(user.userId));
@@ -41,7 +41,7 @@ const PostDetailCard = () => {
     };
 
     try {
-      const response = await axios.put(`http://localhost:3000/post/like/${postId}`, data, {
+      const response = await axios.put(`http://18.212.152.243:3000/post/like/${postId}`, data, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -84,7 +84,7 @@ const PostDetailCard = () => {
       return newShowComments;
     });
 
-    axios.get(`http://localhost:3000/comment/${postId}`)
+    axios.get(`http://18.212.152.243:3000/comment/${postId}`)
       .then((res) => {
         setDataComment(res.data.data);
         // console.log(res.data.data)

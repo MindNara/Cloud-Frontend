@@ -39,7 +39,7 @@ const AddNewPost = ({ userId }) => {
     // console.log(formData)
 
     try {
-      const response = await axios.post('http://localhost:3000/post', formData, {
+      const response = await axios.post('http://18.212.152.243:3000/post', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

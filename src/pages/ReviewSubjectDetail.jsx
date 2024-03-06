@@ -34,7 +34,7 @@ function ReviewSubjectDetail() {
     // console.log("Create " + data.userId);
 
     try {
-      const response = await axios.post(`http://localhost:3000/review/${reviewId}`, data, {
+      const response = await axios.post(`http://18.212.152.243:3000/review/${reviewId}`, data, {
         headers: {
           'Content-Type': 'application/json'
         },
