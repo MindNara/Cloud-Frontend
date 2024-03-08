@@ -7,6 +7,7 @@ import CommentBox from "./CommentBox";
 import CommentInput from "./CommentInput";
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
+import { baseURL } from "../../../baseURL";
 
 const PostDetailCard = () => {
 
@@ -18,11 +19,20 @@ const PostDetailCard = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showComments, setShowComments] = useState([]);
   const [postDetail, setPostDetail] = useState(null);
+  const [checkPostId, setCheckPostId] = useState(null);
 
   useEffect(() => {
-    axios.get("http://18.212.152.243:3000/post")
+    axios.get(`${baseURL}post`)
       .then((res) => {
-        setPostDetail(res.data.data);
+
+        const sortedPostDetail = res.data.data.sort((a, b) => {
+          const timestampA = new Date(a.timestamp.S).getTime();
+          const timestampB = new Date(b.timestamp.S).getTime();
+          return timestampB - timestampA;
+        });
+        setPostDetail(sortedPostDetail);
+        // console.log(res.data.data)
+
         const filteredData = res.data.data.filter(item => item.like?.SS.includes(user.userId));
         if (filteredData.length > 0) {
           const likedPostsData = filteredData.map((item) => {
@@ -32,7 +42,7 @@ const PostDetailCard = () => {
         }
       })
       .catch((err) => console.log(err.message))
-  }, [])
+  }, [checkPostId, postDetail, likedPosts])
   // console.log(likedPosts);
 
   const addlike = async (postId) => {
@@ -41,14 +51,15 @@ const PostDetailCard = () => {
     };
 
     try {
-      const response = await axios.put(`http://18.212.152.243:3000/post/like/${postId}`, data, {
+      const response = await axios.put(`${baseURL}post/like/${postId}`, data, {
         headers: {
           'Content-Type': 'application/json'
         },
       });
 
       if (response.data.success) {
-        window.location.reload();
+        console.log("Post ID: " + postId);
+        setCheckPostId(postId);
       }
     } catch (error) {
       console.error('Error during ilke review:', error);
@@ -84,7 +95,7 @@ const PostDetailCard = () => {
       return newShowComments;
     });
 
-    axios.get(`http://18.212.152.243:3000/comment/${postId}`)
+    axios.get(`${baseURL}comment/${postId}`)
       .then((res) => {
         setDataComment(res.data.data);
         // console.log(res.data.data)
@@ -190,16 +201,15 @@ const PostDetailCard = () => {
                 )}
 
                 <div className="mt-3 flex items-start hover:cursor-pointer">
-                  {likedPosts && likedPosts.length > 0 && index < likedPosts.length ? (
-                    likedPosts[index].post_id === post.id.S && (
-                      <Icon
-                        icon="bxs:heart"
-                        color="#d91818"
-                        width="22"
-                        height="22"
-                        onClick={() => addlike(post.id.S)}
-                      />
-                    )) : (
+                  {likedPosts && likedPosts.length > 0 && likedPosts.some(item => item.post_id === post.id.S) ? (
+                    <Icon
+                      icon="bxs:heart"
+                      color="#d91818"
+                      width="22"
+                      height="22"
+                      onClick={() => addlike(post.id.S)}
+                    />
+                  ) : (
                     <Icon
                       icon="bx:heart"
                       color="#151c38"

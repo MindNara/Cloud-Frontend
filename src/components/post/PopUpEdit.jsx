@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import axios from 'axios';
+import { baseURL } from "../../../baseURL";
 
 const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
 
@@ -13,7 +14,7 @@ const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://18.212.152.243:3000/post/${postId}`)
+    axios.get(`${baseURL}post/${postId}`)
       .then((res) => {
         const postDetail = res.data.data;
         setPostDetail(postDetail);
@@ -61,7 +62,7 @@ const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
     });
 
     try {
-      const response = await axios.put(`http://18.212.152.243:3000/post/${postId}`, formData, {
+      const response = await axios.put(`${baseURL}post/${postId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

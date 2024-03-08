@@ -3,6 +3,7 @@ import CardDetailSubject from '../components/cardReview/CardDetailSubject'
 import CardReview from '../components/cardReview/CardReview'
 import { Outlet, useLocation, Link, useParams } from 'react-router-dom'
 import axios from 'axios';
+import { baseURL } from '../../baseURL';
 
 function ReviewSubjectDetail() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -15,7 +16,7 @@ function ReviewSubjectDetail() {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [reviewDetail, setReviewDetail] = useState("");
   const [reviewGrade, setReviewGrade] = useState("A");
-  const [reviewRating, setReviewRating] = useState("1");
+  const [reviewRating, setReviewRating] = useState("5");
 
   const toggleModalCreate = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
@@ -34,7 +35,7 @@ function ReviewSubjectDetail() {
     // console.log("Create " + data.userId);
 
     try {
-      const response = await axios.post(`http://18.212.152.243:3000/review/${reviewId}`, data, {
+      const response = await axios.post(`${baseURL}review/${reviewId}`, data, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -42,7 +43,7 @@ function ReviewSubjectDetail() {
 
       if (response.data.success) {
         setIsModalCreateOpen(false)
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.error('Error during create review:', error);
@@ -84,7 +85,7 @@ function ReviewSubjectDetail() {
                     </button>
                   </div>
                   <CardReview id={reviewId} />
-                  
+
                   {/* Modal create Review */}
                   {isModalCreateOpen && (
                     <div

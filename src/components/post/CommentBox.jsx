@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { format, parseISO } from 'date-fns';
 import DropdownComment from './DropdownComment';
 import axios from 'axios';
+import { baseURL } from "../../../baseURL";
 
 const CommentBox = ({ postId, dataComment }) => {
 
@@ -14,7 +15,7 @@ const CommentBox = ({ postId, dataComment }) => {
   const postComment = async () => {
 
     try {
-      const response = await axios.post('http://18.212.152.243:3000/comment', {
+      const response = await axios.post(`${baseURL}comment`, {
         message: comment,
         userId: user.userId,
         postId: postId

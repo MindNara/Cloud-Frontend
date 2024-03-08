@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import PopUpComment from "./PopUpComment";
 import axios from 'axios';
+import { baseURL } from "../../../baseURL";
 
 const DropdownComment = ({ commentId, postId }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -28,7 +29,7 @@ const DropdownComment = ({ commentId, postId }) => {
   function deleteComment(id) {
     // console.log(postId);
     console.log("Delete Comment: " + id);
-    axios.delete(`http://18.212.152.243:3000/comment/${id}`, { data: { postId: postId } })
+    axios.delete(`${baseURL}comment/${id}`, { data: { postId: postId } })
       .then(res => {
         window.location.reload();
       })

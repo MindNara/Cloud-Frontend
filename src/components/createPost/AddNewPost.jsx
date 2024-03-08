@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import axios from 'axios';
+import { baseURL } from "../../../baseURL";
 
 const AddNewPost = ({ userId }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,7 +40,7 @@ const AddNewPost = ({ userId }) => {
     // console.log(formData)
 
     try {
-      const response = await axios.post('http://18.212.152.243:3000/post', formData, {
+      const response = await axios.post(`${baseURL}post`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -47,7 +48,7 @@ const AddNewPost = ({ userId }) => {
 
       if (response.data.success) {
         setModalVisible(false);
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.error('Error during signup:', error.response.data);

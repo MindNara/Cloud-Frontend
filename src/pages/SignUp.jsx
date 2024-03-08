@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import SignUpImage from '../assets/SignUpImage.png';
 import axios from 'axios';
+import { baseURL } from '../../baseURL';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -13,43 +14,43 @@ function SignUp() {
     const [passwordError, setPasswordError] = useState('');
 
     // Validate email format
-const validateEmailFormat = (email) => {
-    // Regular expression for email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-};
+    const validateEmailFormat = (email) => {
+        // Regular expression for email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
-// Validate password length
-const validatePasswordLength = (password) => {
-    return password.length >= 3;
-};
+    // Validate password length
+    const validatePasswordLength = (password) => {
+        return password.length >= 3;
+    };
 
-// Validation function
-const validateForm = () => {
-    let valid = true;
+    // Validation function
+    const validateForm = () => {
+        let valid = true;
 
-    if (email.trim() === '') {
-        setEmailError('Email cannot be empty.');
-        valid = false;
-    } else if (!validateEmailFormat(email)) {
-        setEmailError('Invalid email format.');
-        valid = false;
-    } else {
-        setEmailError('');
-    }
+        if (email.trim() === '') {
+            setEmailError('Email cannot be empty.');
+            valid = false;
+        } else if (!validateEmailFormat(email)) {
+            setEmailError('Invalid email format.');
+            valid = false;
+        } else {
+            setEmailError('');
+        }
 
-    if (password.trim() === '') {
-        setPasswordError('Password cannot be empty.');
-        valid = false;
-    } else if (!validatePasswordLength(password)) {
-        setPasswordError('Password must be at least 3 characters.');
-        valid = false;
-    } else {
-        setPasswordError('');
-    }
+        if (password.trim() === '') {
+            setPasswordError('Password cannot be empty.');
+            valid = false;
+        } else if (!validatePasswordLength(password)) {
+            setPasswordError('Password must be at least 3 characters.');
+            valid = false;
+        } else {
+            setPasswordError('');
+        }
 
-    return valid;
-};
+        return valid;
+    };
 
     // SignUp function
     const handleSubmit = async (e) => {
@@ -61,7 +62,7 @@ const validateForm = () => {
         }
 
         try {
-            const response = await axios.post('http://18.212.152.243:3000/register', { email, password });
+            const response = await axios.post(`${baseURL}register`, { email, password });
             if (response.data.success) {
                 navigate('/signIn');
             }

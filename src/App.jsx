@@ -4,7 +4,6 @@ import {
   Homepage,
   Dashboard,
   Review,
-  StudyPlan,
   HowToRegister,
   SignIn,
   SignUp,
