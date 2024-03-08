@@ -25,7 +25,7 @@ const PopUpComment = ({ commentId, handleClose, togglePopup, handlePost }) => {
       });
 
       if (response.data.success) {
-        window.location.reload();
+        // window.location.reload();
         setComment('');
       }
     } catch (error) {

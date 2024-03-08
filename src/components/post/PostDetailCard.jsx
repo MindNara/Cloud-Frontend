@@ -95,13 +95,21 @@ const PostDetailCard = () => {
       return newShowComments;
     });
 
+    getComments(postId);
+  };
+
+  const getComments = (postId) => {
     axios.get(`${baseURL}comment/${postId}`)
       .then((res) => {
         setDataComment(res.data.data);
         // console.log(res.data.data)
       })
-      .catch((err) => console.log(err.message))
+      .catch((err) => console.log(err.message));
   };
+
+  // useEffect(() => {
+    
+  // }, [dataComment]);
 
 
   return (

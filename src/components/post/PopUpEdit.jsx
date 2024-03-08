@@ -70,7 +70,7 @@ const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
 
       if (response.data.success) {
         togglePopup(false);
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.error('Error during signup:', error.response.data);

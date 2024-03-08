@@ -22,7 +22,7 @@ const CommentBox = ({ postId, dataComment }) => {
       });
 
       if (response.data.success) {
-        window.location.reload();
+        // window.location.reload();
         setComment('');
       }
     } catch (error) {
