@@ -43,7 +43,7 @@ function SideNavBar({ toggle, isOpen, setIsOpen }) {
                     <li className={location.pathname === '/dashboard' && 'active'}>
                         <Link to='/dashboard'>
                             <img src={`https://img.icons8.com/fluency-systems-filled/${location.pathname === '/dashboard' ? '181754' : 'FFFFFF'}/home.png`} alt="home" />
-                            <span>Dashboard</span>
+                            <span>Announcement</span>
                         </Link>
                     </li>
                     <li className={location.pathname === '/review' || location.pathname.startsWith('/review/') ? 'active' : ''}>

@@ -17,7 +17,6 @@ function App() {
   const AuthContext = createContext(null);
   const [token, setToken] = useState(localStorage.getItem('accessToken'));
   // console.log(token);
-  // test
 
   return (
     <AuthContext.Provider value={token}>
@@ -30,9 +29,7 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
+                <Dashboard />
               }
             ></Route>
             <Route
