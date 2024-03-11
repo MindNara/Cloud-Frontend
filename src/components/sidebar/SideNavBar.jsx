@@ -59,7 +59,7 @@ function SideNavBar({ toggle, isOpen, setIsOpen }) {
                         </Link>
                     </li>
                 </ul>
-                <Link className='ml-10 max-2xl:ml-8 mr-8 flex gap-4'
+                <Link className='ml-10 max-2xl:ml-8 mr-8 flex gap-4 logout'
                     onClick={handleLogout}
                 >
                     <img className='' width='24' height='24' src="https://img.icons8.com/ios-filled/FFFFFF/logout-rounded.png" alt="logout-rounded" />

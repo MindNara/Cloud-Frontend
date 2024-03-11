@@ -24,16 +24,14 @@
 }
 
 .sidebar ul li a span,
-.sidebar.active .profile-detail .username,
-.sidebar.active .profile-detail .logout {
+.sidebar .logout span  {
     opacity: 100;
     visibility: visible;
     transition: opacity 0.5s ease, visible 1s ease;
 }
 
 .sidebar.active ul li a span,
-.sidebar.active .profile-detail .username,
-.sidebar.active .profile-detail .logout {
+.sidebar.active .logout span {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, visibility 0.3s ease;
