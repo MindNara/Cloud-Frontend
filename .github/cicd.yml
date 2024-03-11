@@ -1,4 +1,4 @@
-name: Deploy Node Application
+name: Deploy React Application
 
 on: 
   push:
@@ -14,17 +14,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t 64070171/frontend .
+        run: docker build -t 64070171/cloud-frontend .
       - name: Publish Image to docker hub
-        run: docker push 64070171/frontend:latest 
+        run: docker push 64070171/cloud-frontend:latest 
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull 64070171/frontend:latest
+        run: docker pull 64070171/cloud-frontend:latest
       - name: Delete old container
         run: docker rm -f reactjs-app-container
       - name: Run Docker Container
-        run: docker run -d -p 80:80 --name reactjs-app-container 64070171/frontend
+        run: docker run -d -p 80:80 --name reactjs-app-container 64070171/cloud-frontend
