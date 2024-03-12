@@ -40,9 +40,9 @@ function SideNavBar({ toggle, isOpen, setIsOpen }) {
                     </button>
                 </div>
                 <ul className='pl-5'>
-                    <li className={location.pathname === '/dashboard' && 'active'}>
-                        <Link to='/dashboard'>
-                            <img src={`https://img.icons8.com/fluency-systems-filled/${location.pathname === '/dashboard' ? '181754' : 'FFFFFF'}/home.png`} alt="home" />
+                    <li className={location.pathname === '/announcement' && 'active'}>
+                        <Link to='/announcement'>
+                            <img src={`https://img.icons8.com/fluency-systems-filled/${location.pathname === '/announcement' ? '181754' : 'FFFFFF'}/home.png`} alt="home" />
                             <span>Announcement</span>
                         </Link>
                     </li>

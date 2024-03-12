@@ -4,7 +4,7 @@ import PopularSubjectsCard from '../components/popularSubjects/PopularSubjectsCa
 import AddNewPost from '../components/createPost/AddNewPost'
 import Layout from './Layout'
 
-function Dashboard() {
+function Announcement() {
 
   const user = JSON.parse(localStorage.getItem('user'));
   // console.log(user);
@@ -26,4 +26,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Announcement

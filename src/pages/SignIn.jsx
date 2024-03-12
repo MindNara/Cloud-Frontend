@@ -64,7 +64,7 @@ function SignIn() {
                 const { accessToken, user } = response.data;
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('user', JSON.stringify(user));
-                navigate('/dashboard');
+                navigate('/announcement');
                 // window.location.reload();
             } else {
                 console.error('Authentication failed:', response.data.error);

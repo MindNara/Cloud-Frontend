@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Homepage,
-  Dashboard,
+  Announcement,
   Review,
   HowToRegister,
   SignIn,
@@ -27,10 +27,10 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route element={<Layout />}>
             <Route
-              path="/dashboard"
+              path="/announcement"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <Announcement />
                 </ProtectedRoute>
               }
             ></Route>
