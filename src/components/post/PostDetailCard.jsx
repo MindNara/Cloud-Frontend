@@ -26,7 +26,6 @@ const PostDetailCard = () => {
   useEffect(() => {
     axios.get(`${baseURL}post`)
       .then((res) => {
-
         const sortedPostDetail = res.data.data.sort((a, b) => {
           const timestampA = new Date(a.timestamp.S).getTime();
           const timestampB = new Date(b.timestamp.S).getTime();
@@ -44,7 +43,7 @@ const PostDetailCard = () => {
         }
       })
       .catch((err) => console.log(err.message))
-  }, [checkPostId, postDetail, likedPosts])
+  }, [postDetail])
   // console.log(likedPosts);
 
   const addlike = async (postId) => {
@@ -62,6 +61,7 @@ const PostDetailCard = () => {
       if (response.data.success) {
         console.log("Post ID: " + postId);
         setCheckPostId(postId);
+        // setCheckLike(!checkLike);
       }
     } catch (error) {
       console.error('Error during ilke review:', error);
@@ -75,13 +75,13 @@ const PostDetailCard = () => {
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % DetailCard.length);
+    // setCurrentImageIndex((prevIndex) => (prevIndex + 1) % DetailCard.length);
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex(
-      (prevIndex) => (prevIndex - 1 + DetailCard.length) % DetailCard.length
-    );
+    // setCurrentImageIndex(
+    //   (prevIndex) => (prevIndex - 1 + DetailCard.length) % DetailCard.length
+    // );
   };
 
   const handleCloseFullScreen = () => {
@@ -328,7 +328,7 @@ const PostDetailCard = () => {
                 )}
 
                 <div className="mt-3 flex items-start hover:cursor-pointer">
-                  {likedPosts && likedPosts.length > 0 && likedPosts.some(item => item.post_id === post.id.S) ? (
+                  {likedPosts.length > 0 && likedPosts.some(item => item.post_id === post.id.S) ? (
                     <Icon
                       icon="bxs:heart"
                       color="#d91818"
