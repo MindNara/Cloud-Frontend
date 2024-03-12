@@ -15,7 +15,7 @@ function Announcement() {
         Announcement
       </header>
       <div className='w-full h-auto flex mt-5'>
-        <div className='mr-10'>
+        <div className='mr-10 w-full'>
           {user.role === 'admin' && (
             < AddNewPost userId={user.userId} />
           )}

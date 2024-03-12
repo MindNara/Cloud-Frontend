@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import axios from 'axios';
 import { baseURL } from "../../../baseURL";
 
-const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
+const PopUpEdit = ({ postId, setIsModalEditOpen, isModalEditOpen }) => {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -69,8 +69,7 @@ const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
       });
 
       if (response.data.success) {
-        togglePopup(false);
-        // window.location.reload();
+        setIsModalEditOpen(false);
       }
     } catch (error) {
       console.error('Error during signup:', error.response.data);
@@ -113,7 +112,7 @@ const PopUpEdit = ({ postId, handleClose, togglePopup, handlePost }) => {
 
                   <button
                     type="button"
-                    onClick={togglePopup}
+                    onClick={() => { setIsModalEditOpen(!isModalEditOpen) }}
                     className="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-300 hover:text-white"
                   >
                     <svg
