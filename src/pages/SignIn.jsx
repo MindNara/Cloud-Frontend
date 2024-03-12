@@ -70,6 +70,7 @@ function SignIn() {
                 console.error('Authentication failed:', response.data.error);
             }
         } catch (error) {
+            alert("รหัสผ่านผิดพลาด โปรดลองใหม่อีกครั้ง");
             console.error('Error during signin:', error.response.data);
         }
     };
