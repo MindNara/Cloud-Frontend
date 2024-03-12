@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./PostDetailCard.css";
 import { Carousel } from "@material-tailwind/react";
+import { Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
 import DropdownDots from "./DropdownDots";
 import CommentBox from "./CommentBox";
 import CommentInput from "./CommentInput";
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
 import { baseURL } from "../../../baseURL";
+
 
 const PostDetailCard = () => {
 
@@ -120,8 +122,40 @@ const PostDetailCard = () => {
             <div className="flex-shrink-0 border-[1px] border-solid border-gray-300 rounded-[30px] p-6 bg-white">
               <div className="text-[#151C38] text-2xl font-[500] leading-normal flex justify-between">
                 <span>{post.title.S}</span>
+            
                 {user.role === 'admin' && (
-                  <DropdownDots postId={post.id.S} />
+                  // <DropdownDots postId={post.id.S} />
+                  <Menu placement="bottom-end" postId={post.id.S}>
+                    <MenuHandler>
+                      <div className="flex items-center cursor-pointer">
+                        <Icon icon="prime:ellipsis-h" color="#151c38" width="22" height="22" />
+                      </div>
+                    </MenuHandler>
+                    <MenuList className="bg-[#ffffff] border border-gray-200 shadow-md rounded-xl text-sm">
+                      <MenuItem className="hover:bg-gray-200 cursor-pointer rounded-xl" onClick={{}}>
+                        <div className="flex item-center py-3">
+                          <Icon
+                            icon="fluent:edit-24-regular"
+                            color="#727272"
+                            width="15"
+                            height="15"
+                          />
+                          <span className="pl-3 text-gray-700">Edit Post</span>
+                        </div>
+                      </MenuItem>
+                      <MenuItem className="hover:bg-gray-200 cursor-pointer rounded-xl" onClick={{}} >
+                        <div className="flex item-center py-3">
+                          <Icon
+                            icon="mingcute:delete-3-line"
+                            color="#727272"
+                            width="15"
+                            height="15"
+                          />
+                          <span className="pl-3 text-gray-700">Delete Post</span>
+                        </div>
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
                 )}
               </div>
 
