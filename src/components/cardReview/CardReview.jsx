@@ -25,15 +25,17 @@ function CardReview({ id }) {
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
     const [reviewToDeleteId, setReviewToDeleteId] = useState('');
     const [reviewToEditId, setReviewToEditId] = useState('');
+    const [statusLikeReview, setStatusLikeReview] = useState('');
+    const [statusDisLikeReview, setStatusDisLikeReview] = useState('');
 
 
     useEffect(() => {
-        console.log(id)
+        // console.log(id)
         const fetchDataReview = async () => {
             try {
                 const response = await axios.get(`${baseURL}review/${id}`);
                 setReviews(response.data.data);
-                console.log(response.data.data);
+                // console.log(response.data.data);
             } catch (error) {
                 console.error(error.message);
             }
@@ -42,10 +44,24 @@ function CardReview({ id }) {
         fetchDataReview();
     }, [reviews]); //โดยการเพิ่ม reviews เข้าไปใน dependencies array ของ useEffect จะทำให้ fetchDataReview() ถูกเรียกเมื่อ reviews เปลี่ยนแปลง
 
+    useEffect(() => {
+        const filterStatusLike = {};
+        const filterStatusDisLike = {};
+        reviews.forEach(reviewDetail => {
+          //ถ้า Review ไหนมี userCurrent 'กดหัวใจ' จะมีค่าเป็น true
+          //โดยจะเก็บ key ของ review นั้น มันคือค่า document ของ review แต่ละอันอะ และ boolean
+          filterStatusLike[reviewDetail.review_id.S] = reviewDetail.like.SS.includes(user.userId);
+          filterStatusDisLike[reviewDetail.review_id.S] = reviewDetail.dislike.SS.includes(user.userId);
+        });
+        console.log(filterStatusLike)
+        setStatusLikeReview(filterStatusLike);
+        setStatusDisLikeReview(filterStatusDisLike);
+    }, [reviews]); //โดยดูการเปลี่ยนแปลงของ review
+
     // แสดงผลดาวตรง rating
     function DisplayRating(rate) {
         const arrayRate = [];
-        console.log(rate.rate)
+        // console.log(rate.rate)
         for (let i = 0; i < rate.rate; i++) {
             arrayRate.push(
                 <img
@@ -54,7 +70,7 @@ function CardReview({ id }) {
                 />
             );
         }
-        console.log(arrayRate)
+        // console.log(arrayRate)
         return <div className="flex flex-row ml-2">{arrayRate}</div>
     }
 
@@ -398,7 +414,7 @@ function CardReview({ id }) {
                     <div className="flex flex-row mt-2">
                         <button name="like" className="rotate-0" onClick={() => { addlike(review.review_id.S) }}>
                             <Icon
-                                icon="streamline:like-1-solid"
+                                icon={statusLikeReview[review.review_id.S] ? "streamline:like-1-solid" : "streamline:like-1"}
                                 color="#9A1B29"
                                 width="22"
                                 height="22"
@@ -406,13 +422,21 @@ function CardReview({ id }) {
                         </button>
                         <p className="ml-2 text-[#151C38]">{review.like.SS.length - 1}</p>
                         <button name="dislike" className="rotate-180 mt-1 ml-2" onClick={() => { addDislike(review.review_id.S) }}>
+                                <Icon
+                                    icon={statusDisLikeReview[review.review_id.S] ? "streamline:like-1-solid" : "streamline:like-1"}
+                                    color="#9A1B29"
+                                    width="22"
+                                    height="22"
+                                />
+                            </button>
+                        {/* <button name="dislike" className="rotate-180 mt-1 ml-2" onClick={() => { addDislike(review.review_id.S) }}>
                             <Icon
                                 icon="streamline:like-1"
                                 color="#9A1B29"
                                 width="22"
                                 height="22"
                             />
-                        </button>
+                        </button> */}
                         <p className="ml-2 text-[#151C38]">{review.dislike.SS.length - 1}</p>
                     </div>
                 </div>
