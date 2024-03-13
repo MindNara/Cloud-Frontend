@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import axios from 'axios';
 import { baseURL } from "../../../baseURL";
@@ -8,6 +8,15 @@ const AddNewPost = ({ userId }) => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [titleError, setTitleError] = useState('');
+  const [detailError, setDetailError] = useState('');
+
+  useEffect(() => {
+    if (!modalVisible) {
+      setTitleError('');
+      setDetailError('');
+    }
+  }, [modalVisible]);
 
   const handleChange = (e) => {
     const files = e.target.files;
@@ -26,6 +35,20 @@ const AddNewPost = ({ userId }) => {
   };
 
   const handlePost = async () => {
+
+    if (title.trim() === '') {
+      setTitleError('Please enter a title');
+      return;
+    } else {
+      setTitleError('');
+    }
+
+    if (detail.trim() === '') {
+      setDetailError('Please enter a message');
+      return;
+    } else {
+      setDetailError('');
+    }
 
     const formData = new FormData();
     formData.append('title', title);
@@ -137,6 +160,7 @@ const AddNewPost = ({ userId }) => {
                     className="border-none outline-none p-2  w-full focus:ring-0 text-xl font-semibold"
                     onChange={(e) => setTitle(e.target.value)}
                   />
+                  {titleError && <p className="text-red-500 ml-2 text-sm ">{titleError}</p>}
                   <textarea
                     rows="4"
                     cols="50"
@@ -144,6 +168,7 @@ const AddNewPost = ({ userId }) => {
                     className="border-none outline-none p-2 mb-4 w-full resize-none focus:ring-0 text-base font-normal"
                     onChange={(e) => setDetail(e.target.value)}
                   />
+                  {detailError && <p className="text-red-500 ml-2 text-sm ">{detailError}</p>}
                 </div>
 
                 <div className="flex items-center p-4 md:p-5 rounded-b mt-[-20px]">
