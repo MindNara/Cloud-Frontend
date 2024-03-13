@@ -43,6 +43,9 @@ function ReviewSubjectDetail() {
 
       if (response.data.success) {
         setIsModalCreateOpen(false)
+        setReviewDetail("");
+        setReviewGrade("A");
+        setReviewRating("5");
         // window.location.reload();
       }
     } catch (error) {
