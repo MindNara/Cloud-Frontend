@@ -86,7 +86,7 @@ const PopUpEdit = ({ postId, setIsModalEditOpen, isModalEditOpen }) => {
           tabIndex="-1"
           aria-hidden="true"
           className="fixed inset-0 overflow-y-auto"
-          style={{ zIndex: 1001, borderRadius: "30px" }}
+          style={{ zIndex: 2000, borderRadius: "30px" }}
         >
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div

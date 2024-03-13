@@ -233,13 +233,6 @@ const PostDetailCard = () => {
                         </div>
                       </div>
                     )}
-
-                    {isModalEditOpen && (
-                      <>
-                        <PopUpEdit postId={postIdEdit} setIsModalEditOpen={setIsModalEditOpen} isModalEditOpen={isModalEditOpen} />
-                      </>
-                    )}
-
                   </>
                 )}
               </div>
@@ -370,6 +363,10 @@ const PostDetailCard = () => {
             </div>
           </div>
         ))}
+
+      {isModalEditOpen && (
+        <PopUpEdit postId={postIdEdit} setIsModalEditOpen={setIsModalEditOpen} isModalEditOpen={isModalEditOpen} />
+      )}
     </div>
   );
 };
